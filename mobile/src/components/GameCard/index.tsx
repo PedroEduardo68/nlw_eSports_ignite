@@ -10,7 +10,7 @@ export interface GameCardProps {
   bannerUrl:string,
   title:string,
   _count:{
-    ads:number,
+    Ads:number,
   }
 }
 interface Props  extends TouchableOpacityProps {
@@ -34,7 +34,7 @@ export function GameCard({data, ...rest}: Props) {
           </Text>
 
           <Text style={styles.ads}>
-            {data._count.ads} anúncios
+            {data._count.Ads} anúncios
           </Text>
           
         </LinearGradient>
