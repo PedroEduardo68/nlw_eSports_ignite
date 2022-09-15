@@ -8,7 +8,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 
 import { styles } from './styles';
 import { GameParams } from '../../@types/navigation';
-import { FlatList, Image, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
 import {Entypo} from '@expo/vector-icons'
 import { THEME } from '../../theme';
 import logoImg from '../../assets/logo-nlw-esports.png'
@@ -79,7 +79,12 @@ export function Game() {
           data={duos}
           horizontal
           style={styles.containerList}
-          contentContainerStyle={styles.contentList}
+          contentContainerStyle={[duos.length > 0 ? styles.contentList : styles.emptyListContent]}
+          ListEmptyComponent={()=>(
+            <Text style={styles.emptyListText}>
+              Não há anuncios publicados para esse jogo
+            </Text>
+          )}
           showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({item}) =>(
