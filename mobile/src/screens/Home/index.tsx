@@ -11,9 +11,6 @@ import { GameCard, GameCardProps } from '../../components/GameCard';
 import { useEffect, useState } from 'react';
 
 
-
-
-
 export function Home() {
   const [games, setGames] = useState<GameCardProps[]>([])
 
