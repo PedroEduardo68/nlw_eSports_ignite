@@ -9,45 +9,66 @@ import { GameCard, GameCardProps } from '../../components/GameCard';
 
 
 import { useEffect, useState } from 'react';
+import { Background } from '../../components/Background';
+
+import { useNavigation } from '@react-navigation/native';
+
+
+
 
 
 export function Home() {
   const [games, setGames] = useState<GameCardProps[]>([])
 
 
+  const navigation = useNavigation();
+
+  const handleOpenGame = ({id, title, bannerUrl}: GameCardProps) =>{
+    navigation.navigate('game', {id, title, bannerUrl});
+  }
+
+
+
+
   useEffect(() =>{
-    fetch('http://192.168.18.145:333/games')
+    fetch('http://192.168.18.145:3333/games')
       .then(response =>response.json())
       .then(data => setGames(data))
   }, [])
+
+
+
   return (
-    <SafeAreaView style={styles.container}>
-      <Image
-        source={logoImg}
-        style={styles.logo}
-      />
+    <Background>
+      <SafeAreaView style={styles.container}>
+        <Image
+          source={logoImg}
+          style={styles.logo}
+        />
 
 
-      <Heading 
-        title='Encontre seu DUO!!'
-        subtitle='Selecione o game que deseja Jogar..'
-      />
+        <Heading 
+          title='Encontre seu DUO!!'
+          subtitle='Selecione o game que deseja Jogar..'
+        />
 
-      <FlatList 
-        data={games}
-        keyExtractor={item => item.id}
-        renderItem={({item}) =>(
-            <GameCard 
-            data={item}
-          />
-        )}
-        showsHorizontalScrollIndicator={false}
-        horizontal
-        contentContainerStyle={styles.contentList}
-      />
+        <FlatList 
+          data={games}
+          keyExtractor={item => item.id}
+          renderItem={({item}) =>(
+              <GameCard 
+              data={item}
+              onPress={() => handleOpenGame(item)}
+            />
+          )}
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          contentContainerStyle={styles.contentList}
+        />
 
 
 
-    </SafeAreaView>
+      </SafeAreaView>
+    </Background>
   );
 }
