@@ -77,10 +77,15 @@ export function Game() {
 
         <FlatList 
           data={duos}
+          horizontal
+          style={styles.containerList}
+          contentContainerStyle={styles.contentList}
+          showsHorizontalScrollIndicator={false}
           keyExtractor={item => item.id}
           renderItem={({item}) =>(
               <DuoCard 
               data={item}
+              onConnect={()=>{}}
             />
           )}
         />

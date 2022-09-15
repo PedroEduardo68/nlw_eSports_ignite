@@ -16,4 +16,5 @@ export const styles = StyleSheet.create({
     fontSize: THEME.FONT_SIZE.SM,
     fontFamily: THEME.FONT_FAMILY.BOLD,
   }
+
 });
