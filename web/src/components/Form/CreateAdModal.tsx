@@ -4,6 +4,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
 import { useEffect, useState } from 'react';
+import * as ToggleGroup from '@radix-ui/react-toggle-group'
 
 
 interface Game {
@@ -75,15 +76,17 @@ export const CreateAdModal = () =>{
                   <div className='flex gap-6'>
                     <div className='flex-col gap-2 flex'>
                       <label htmlFor='weekDays'>Quando costuma Jogar? </label>
-                      <div className='grid grid-cols-4'>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Domingo'>D</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Segunda'>S</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Terca'>T</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Quarta'>Q</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Quinta'>Q</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Sexta'>S</button>
-                        <button className="w-8 h-8 rounded bg-zinc-900" title='Sabado'>S</button>
-                      </div>
+     
+                    <ToggleGroup.Root type="multiple" className='grid grid-cols-4 gap-2'>
+                        <ToggleGroup.Item value="0" className="w-8 h-8 rounded bg-zinc-900" title='Domingo'>D</ToggleGroup.Item>
+                        <ToggleGroup.Item value="1" className="w-8 h-8 rounded bg-zinc-900" title='Segunda'>S</ToggleGroup.Item>
+                        <ToggleGroup.Item value="2" className="w-8 h-8 rounded bg-zinc-900" title='Terca'>T</ToggleGroup.Item>
+                        <ToggleGroup.Item value="3" className="w-8 h-8 rounded bg-zinc-900" title='Quarta'>Q</ToggleGroup.Item>
+                        <ToggleGroup.Item value="4" className="w-8 h-8 rounded bg-zinc-900" title='Quinta'>Q</ToggleGroup.Item>
+                        <ToggleGroup.Item value="5" className="w-8 h-8 rounded bg-zinc-900" title='Sexta'>S</ToggleGroup.Item>
+                        <ToggleGroup.Item value="6" className="w-8 h-8 rounded bg-zinc-900" title='Sabado'>S</ToggleGroup.Item>
+                    </ToggleGroup.Root>
+                   
 
                     </div>
                     <div className='flex-col gap-2 flex flex-1'>
