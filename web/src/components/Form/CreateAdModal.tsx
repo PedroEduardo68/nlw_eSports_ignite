@@ -3,8 +3,32 @@ import { Input } from './Input'
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
+import { useEffect, useState } from 'react';
+
+
+interface Game {
+    id:string,
+    title:string,
+  }
+
 
 export const CreateAdModal = () =>{
+
+    const [games, setGames] = useState<Game[]>([])
+
+    useEffect(()=>{
+      fetch('http://localhost:3333/games')
+      .then(response => response.json())
+      .then(data =>{
+        setGames(data);
+      })
+  
+    },[])
+
+
+
+
+
     return (
         <>
         <Dialog.Portal>
@@ -17,7 +41,16 @@ export const CreateAdModal = () =>{
                 <form className='mt-8 flex flex-col gap-4'>
                   <div className='flex-col gap-2 flex'>
                     <label htmlFor="game" className='font-semibold'>Qual o Game? </label>
-                    <select id="game" placeholder='Selecione o game que deseja jogar'> 
+                    <select 
+                        className='bg-zinc-900 px-3 py-4 rounded text-sm placeholder:text-zinc-500 appearance-none'
+                        id="game" 
+                    > 
+                        <option selected disabled value="">Selecione o game que deseja jogar'</option>
+                        {games.map(item => {
+                            return(
+                                <option key={item.id} value={item.id}>{item.title}</option>
+                            )
+                        })}
                     </select>
                   </div>
 
