@@ -3,7 +3,7 @@ import { Input } from './Input'
 import * as Dialog from '@radix-ui/react-dialog';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
 
 
@@ -28,7 +28,15 @@ export const CreateAdModal = () =>{
     },[])
 
 
-    console.log(weekDays)
+    const handleCreatedAd = (event: FormEvent) =>{
+        event.preventDefault();
+
+        const fromData = new FormData(event.target as HTMLFormElement)
+
+        const data = Object.fromEntries(fromData)
+
+
+    }
 
 
     return (
@@ -40,10 +48,11 @@ export const CreateAdModal = () =>{
                 Publique um anúncio
               </Dialog.Title>
 
-                <form className='mt-8 flex flex-col gap-4'>
+                <form onSubmit={handleCreatedAd} className='mt-8 flex flex-col gap-4'>
                   <div className='flex-col gap-2 flex'>
                     <label htmlFor="game" className='font-semibold'>Qual o Game? </label>
                     <select 
+                        name='game'
                         className='bg-zinc-900 px-3 py-4 rounded text-sm placeholder:text-zinc-500 appearance-none'
                         id="game" 
                     > 
@@ -59,17 +68,17 @@ export const CreateAdModal = () =>{
 
                   <div className='flex-col gap-2 flex'>
                     <label htmlFor='name'>Seu nome (ou nickname)</label>
-                    <Input id="name" placeholder="Como te chamam dentro do game?" />
+                    <Input name="name" id="name" placeholder="Como te chamam dentro do game?" />
                   </div>
 
                   <div className="grid grid-cols-2 gap-6">
                     <div className='flex-col gap-2 flex'>
                       <label htmlFor='yearsPlaying'>Joga há quantos anos? </label>
-                      <Input id="yearsPlaying" type="number" placeholder="Tudo bem ser ZERO" />
+                      <Input name="yearsPlaying" id="yearsPlaying" type="number" placeholder="Tudo bem ser ZERO" />
                     </div>
                     <div className='flex-col gap-2 flex'>
                       <label htmlFor='discord'>Qual seu Discord? </label>
-                      <Input id="discord" type="text" placeholder="Usuario#0000" />
+                      <Input name="discord" id="discord" type="text" placeholder="Usuario#0000" />
                     </div>
                   </div>
 
@@ -93,21 +102,21 @@ export const CreateAdModal = () =>{
                     <div className='flex-col gap-2 flex flex-1'>
                       <label htmlFor='hourStart'>Quando horário do dia? </label>
                       <div className='grid grid-cols-2 gap-2'>
-                        <Input type="time" id="hourStart" placeholder='De'/> 
-                        <Input type="time" id="hourEnd" placeholder='Até'/> 
+                        <Input name='time' type="time" id="hourStart" placeholder='De' className='appearance-none'/> 
+                        <Input name='time' type="time" id="hourEnd" placeholder='Até' className='appearance-none'/> 
                       </div>
                     </div>
                   </div>
 
 
-                  <div className='mt-2 flex items-center gap-2 text-sm'> 
+                  <label className='mt-2 flex items-center gap-2 text-sm'> 
                     <Checkbox.Root  className='w-6 h-6 p-1 rounded bg-zinc-900' >
                         <Checkbox.Indicator >
                             <Check className='w-4 h-4 text-emerald-400' />
                         </Checkbox.Indicator>
                     </Checkbox.Root>
                     Constumo me Conectar no Chat de Voz?
-                  </div>
+                  </label>
 
 
                   <footer className='mt-4 flex justify-end gap-4'>
@@ -117,10 +126,6 @@ export const CreateAdModal = () =>{
                       Entrar duo
                     </button>
                   </footer>
-
-
-
-
                 </form>
               
             </Dialog.Content>
