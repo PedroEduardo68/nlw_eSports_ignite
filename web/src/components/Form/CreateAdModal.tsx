@@ -17,6 +17,7 @@ export const CreateAdModal = () =>{
 
     const [weekDays, setWeekDays] = useState<string[]>([])
     const [games, setGames] = useState<Game[]>([])
+    const [useVoiceChannel,setUseVoiceChannel] = useState<boolean>(false)
 
     useEffect(()=>{
       fetch('http://localhost:3333/games')
@@ -87,7 +88,9 @@ export const CreateAdModal = () =>{
                     <div className='flex-col gap-2 flex'>
                       <label htmlFor='weekDays'>Quando costuma Jogar? </label>
      
-                    <ToggleGroup.Root type="multiple" className='grid grid-cols-4 gap-2' value={weekDays} onValueChange={setWeekDays}>
+                    <ToggleGroup.Root
+    
+                    type="multiple" className='grid grid-cols-4 gap-2' value={weekDays} onValueChange={setWeekDays}>
                         <ToggleGroup.Item value="0" className={`w-8 h-8 rounded ${weekDays.includes('0') ? 'bg-violet-500' : ' bg-zinc-900'}`} title='Domingo'>D</ToggleGroup.Item>
                         <ToggleGroup.Item value="1" className={`w-8 h-8 rounded ${weekDays.includes('1') ? 'bg-violet-500' : ' bg-zinc-900'}`} title='Segunda'>S</ToggleGroup.Item>
                         <ToggleGroup.Item value="2" className={`w-8 h-8 rounded ${weekDays.includes('2') ? 'bg-violet-500' : ' bg-zinc-900'}`} title='Terca'>T</ToggleGroup.Item>
@@ -110,7 +113,16 @@ export const CreateAdModal = () =>{
 
 
                   <label className='mt-2 flex items-center gap-2 text-sm'> 
-                    <Checkbox.Root  className='w-6 h-6 p-1 rounded bg-zinc-900' >
+                    <Checkbox.Root  
+                        checked={useVoiceChannel}
+                        onCheckedChange={(checked) =>{
+                            if(checked ===true){
+                                setUseVoiceChannel(true)
+                            }else{
+                                setUseVoiceChannel(false)
+                            }
+                        }}
+                        className='w-6 h-6 p-1 rounded bg-zinc-900' >
                         <Checkbox.Indicator >
                             <Check className='w-4 h-4 text-emerald-400' />
                         </Checkbox.Indicator>
