@@ -13,7 +13,7 @@ interface Game {
   bannerUrl:string,
   title:string,
   _count:{
-    ads:number,
+    Ads:number,
   }
 }
 
@@ -44,7 +44,7 @@ function App() {
           key={item.id}
           bannerUrl={item.bannerUrl} 
           title={item.title} 
-          adsCount={item._count.ads} 
+          adsCount={item._count.Ads} 
         />
         )
       })}
