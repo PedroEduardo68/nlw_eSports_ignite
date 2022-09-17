@@ -15,7 +15,7 @@ import logoImg from '../../assets/logo-nlw-esports.png'
 import { Heading } from '../../components/Heading';
 import { DuoCard, DuoCardProps} from '../../components/DuoCard';
 import { useEffect, useState } from 'react';
-
+import { DuoMatch } from '../../components/DuoMatch'
 
 
 
@@ -95,7 +95,7 @@ export function Game() {
           )}
         />
 
-
+            <DuoMatch visible={false} discord="" />
         </SafeAreaView>
     </Background>
   );
