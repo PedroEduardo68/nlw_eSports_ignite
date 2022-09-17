@@ -31,24 +31,27 @@ app.get('/games', async (request, response) =>{
 
 
 
-app.post('games/:id/ads', async (request, response) =>{
-    const gameId = request.params.id;
+app.post('/games/:id/ads', async (request, response) =>{
+    const gameId_ = request.params.id;
     const body = request.body;
+    try {
+        const ad = await prisma.ad.create({
+            data:{
+                gameId:gameId_,
+                name : body.name,
+                yearsPlaying: body.yearsPlaying,
+                discord : body.discord,
+                weekDays : body.weekDays.join(','),
+                hourStart : convertHoursStringstoMinutes(body.hourStart),
+                hourEnd : convertHoursStringstoMinutes(body.hourEnd),
+                useVoiceChannel : body.useVoiceChannel,
+            }
+        })
+        return response.status(200).json(ad)
+    }catch (err) {
+        return response.status(401)
+    }
 
-    const ad = await prisma.ad.create({
-        data:{
-            gameId,
-            name : body.name,
-            yearsPlaying: body.yearsPlaying,
-            discord : body.discord,
-            weekDays : body.weekDays.join(','),
-            hourStart : convertHoursStringstoMinutes(body.hourStart),
-            hourEnd : convertHoursStringstoMinutes(body.hourEnd),
-            useVoiceChannel : body.useVoiceChannel,
-        }
-    })
-
-    return response.status(200).json(ad)
 })
 
 
@@ -77,7 +80,7 @@ app.get('/games/:id/ads', async (request, response) => {
     return response.json(ads.map((ad: any) => {
         return {
             ...ad,
-            weekDays:ad.weekDays.split(','),
+            weekDays: ad.weekDays.split(','),
             hourStart: convertMinutesToHourStrings(ad.hourStart),
             hourEnd: convertMinutesToHourStrings(ad.hourEnd),
         }

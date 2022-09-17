@@ -5,6 +5,7 @@ import * as Checkbox from '@radix-ui/react-checkbox';
 import * as Select from '@radix-ui/react-select';
 import { FormEvent, useEffect, useState } from 'react';
 import * as ToggleGroup from '@radix-ui/react-toggle-group'
+import axios from 'axios';
 
 
 interface Game {
@@ -20,10 +21,9 @@ export const CreateAdModal = () =>{
     const [useVoiceChannel,setUseVoiceChannel] = useState<boolean>(false)
 
     useEffect(()=>{
-      fetch('http://localhost:3333/games')
-      .then(response => response.json())
+      axios('http://localhost:3333/games')
       .then(data =>{
-        setGames(data);
+        setGames(data.data);
       })
   
     },[])
@@ -36,7 +36,24 @@ export const CreateAdModal = () =>{
 
         const data = Object.fromEntries(fromData)
 
-
+        if(!data.name){
+          return;
+        }
+        console.log(data.games)
+        try {
+            axios.post(`http://localhost:3333/games/${data.game}/ads`,{
+                "name" : data.name,
+                "yearsPlaying": Number(data.yearsPlaying),
+                "discord" : data.discord,
+                "weekDays" : weekDays.map(Number),
+                "hourStart" : data.hourStart,
+                "hourEnd" : data.hourEnd,
+                "useVoiceChannel" : useVoiceChannel
+            })
+            alert('Salvo Com Sucesso!!')
+        }catch (err) {
+            alert('Erro ao criar o anúncio')
+        }
     }
 
 
@@ -105,8 +122,8 @@ export const CreateAdModal = () =>{
                     <div className='flex-col gap-2 flex flex-1'>
                       <label htmlFor='hourStart'>Quando horário do dia? </label>
                       <div className='grid grid-cols-2 gap-2'>
-                        <Input name='time' type="time" id="hourStart" placeholder='De' className='appearance-none'/> 
-                        <Input name='time' type="time" id="hourEnd" placeholder='Até' className='appearance-none'/> 
+                        <Input name='hourStart' type="time" id="hourStart" placeholder='De' className='appearance-none'/> 
+                        <Input name='hourEnd' type="time" id="hourEnd" placeholder='Até' className='appearance-none'/> 
                       </div>
                     </div>
                   </div>
