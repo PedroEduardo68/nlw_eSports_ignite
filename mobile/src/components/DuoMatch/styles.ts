@@ -13,6 +13,10 @@ export const styles = StyleSheet.create({
     fontSize: THEME.FONT_SIZE.MD,
     fontFamily:THEME.FONT_FAMILY.REGULAR,
   },
+  closeIcon:{
+    alignSelf: "flex-end",
+    margin:16,
+  },
   content:{
     width:311,
     backgroundColor: THEME.COLORS.SHAPE,

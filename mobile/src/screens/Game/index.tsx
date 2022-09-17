@@ -22,6 +22,7 @@ import { DuoMatch } from '../../components/DuoMatch'
 
 export function Game() {
   const [duos,setDous] = useState<DuoCardProps[]>([])
+  const [discordDuoSelected, setDiscordDuoSelected] = useState<string>('')
 
   const route = useRoute();
   const game = route.params as GameParams;
@@ -95,7 +96,7 @@ export function Game() {
           )}
         />
 
-            <DuoMatch visible={false} discord="" />
+            <DuoMatch visible={discordDuoSelected.length > 0 } discord="" onClose={() => setDiscordDuoSelected('')} />
         </SafeAreaView>
     </Background>
   );
