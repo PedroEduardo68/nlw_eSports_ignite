@@ -104,7 +104,7 @@ const getDiscrodUser = async (adsId:string) => {
 
             <DuoMatch 
               visible={discordDuoSelected.length > 0 } 
-              discord=""
+              discord={discordDuoSelected}
               onClose={() => setDiscordDuoSelected('')} 
             />
             
