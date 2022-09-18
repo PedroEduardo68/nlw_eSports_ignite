@@ -8,6 +8,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: THEME.COLORS.OVERLAY
   },
+  label:{
+    color: THEME.COLORS.TEXT,
+    fontSize: THEME.FONT_SIZE.MD,
+    fontFamily:THEME.FONT_FAMILY.SEMI_BOLD,
+    marginTop: 24,
+    marginBottom:8,
+  },
   discord :{
     color: THEME.COLORS.TEXT,
     fontSize: THEME.FONT_SIZE.MD,
@@ -23,5 +30,15 @@ export const styles = StyleSheet.create({
     borderRadius:8,
     alignItems:'center',
     justifyContent:'center',
+  },
+  discordButtom:{
+    width: 231,
+    height:48,
+    backgroundColor: THEME.COLORS.BACKGROUND_900,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+    margin:32,
+
   }
 });

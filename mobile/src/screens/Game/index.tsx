@@ -32,9 +32,15 @@ export function Game() {
     navigation.goBack();
   }
 
+const getDiscrodUser = async (adsId:string) => {
+  await fetch(`http://192.168.0.106:3333/ads/${adsId}/discord`)
+  .then(response =>response.json())
+  .then(data =>setDiscordDuoSelected(data.discord))
+ }
+
 
   useEffect(() =>{
-    fetch(`http://192.168.18.145:3333/games/${game.id}/ads`)
+    fetch(`http://192.168.0.106:3333/games/${game.id}/ads`)
       .then(response =>response.json())
       .then(data =>setDous(data))
   }, [])
@@ -91,12 +97,17 @@ export function Game() {
           renderItem={({item}) =>(
               <DuoCard 
               data={item}
-              onConnect={()=>{}}
+              onConnect={()=>getDiscrodUser(item.id)}
             />
           )}
         />
 
-            <DuoMatch visible={discordDuoSelected.length > 0 } discord="" onClose={() => setDiscordDuoSelected('')} />
+            <DuoMatch 
+              visible={discordDuoSelected.length > 0 } 
+              discord=""
+              onClose={() => setDiscordDuoSelected('')} 
+            />
+            
         </SafeAreaView>
     </Background>
   );
