@@ -32,6 +32,7 @@ export function Game() {
     navigation.goBack();
   }
 
+  console.log(discordDuoSelected) 
 const getDiscrodUser = async (adsId:string) => {
   await fetch(`http://192.168.18.145:3333/ads/${adsId}/discord`)
   .then(response =>response.json())
